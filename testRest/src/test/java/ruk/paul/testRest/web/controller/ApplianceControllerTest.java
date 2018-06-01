@@ -15,9 +15,11 @@ import ruk.paul.testRest.service.ApplianceService;
 import ruk.paul.testRest.web.dto.ApplianceDto;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.core.Is.is;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
@@ -59,7 +61,7 @@ public class ApplianceControllerTest extends TestCase {
         mockMvc.perform(get("/appliance/1")
                             .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)));
+                .andExpect(jsonPath("$.item", is(appliance.getItem())));
 
     }
 
